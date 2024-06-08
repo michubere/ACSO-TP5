@@ -5,7 +5,6 @@
 #include "diskimg.h"
 
 #define INDIR_ADDR 7
-#define INODE_START_SECTOR 2
 
 /**
  * TODO
@@ -16,11 +15,11 @@ int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
     }
 
     int inodes_per_block = DISKIMG_SECTOR_SIZE / sizeof(struct inode);
-    int block_num = (inumber - 1) / inodes_per_block; // ver si agrego INODE_START_SECTOR
+    int block_num = (inumber - 1) / inodes_per_block;
     int offset = (inumber - 1) % inodes_per_block;
 
     struct inode inodes[inodes_per_block];
-    int read = diskimg_readsector(fs->dfd, block_num, inp);
+    int read = diskimg_readsector(fs->dfd, INODE_START_SECTOR + offset, inodes);
     if (read == -1) {
         return -1;
     }
