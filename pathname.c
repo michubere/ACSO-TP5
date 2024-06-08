@@ -13,13 +13,13 @@
  */
 int pathname_lookup(struct unixfilesystem *fs, const char *pathname) {
     
-    if (fs == NULL || strlen(pathname) == 0 || pathname == NULL) {
-        return -1;
-    }
+    // if (fs == NULL || strlen(pathname) == 0 || pathname == NULL) {
+    //     return -1;
+    // }
 
-    if (pathname[0] != '/') {
-        return -1;
-    }
+    // if (pathname[0] != '/') {
+    //     return -1;
+    // }
 
     if (strcmp(pathname, "/") == 0) {
         return ROOT_INUMBER;

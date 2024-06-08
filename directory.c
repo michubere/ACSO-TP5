@@ -13,9 +13,9 @@
 int directory_findname(struct unixfilesystem *fs, const char *name,
 		int dirinumber, struct direntv6 *dirEnt) {
   
-  if (fs == NULL || name == NULL || strlen(name) == 0 || strlen(name) > DIRENTV6_NAMELEN || dirinumber < 1 || dirinumber > fs->superblock.s_ninode || dirEnt == NULL) {
-    return -1;
-  }
+  // if (fs == NULL || name == NULL || strlen(name) == 0 || strlen(name) > DIRENTV6_NAMELEN || dirinumber < 1 || dirinumber > fs->superblock.s_ninode || dirEnt == NULL) {
+  //   return -1;
+  // }
 
   struct inode inp;
   int inode = inode_iget(fs, dirinumber, &inp);
