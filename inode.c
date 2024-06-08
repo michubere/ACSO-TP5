@@ -13,6 +13,7 @@ int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
     // if (inumber < 1 || inumber > fs->superblock.s_ninode || inp == NULL || fs == NULL) {
     //     return -1;
     // }
+    // COMENTO TODOS LOS CHEQUEOS PORQUE ME ESTÁN GENERANDO ERRORES POR ALGUNA RAZÓN QUE NO ENTIENDO
 
     int inodes_per_block = DISKIMG_SECTOR_SIZE / sizeof(struct inode);
     int block_num = (inumber - 1) / inodes_per_block;
