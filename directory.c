@@ -42,7 +42,7 @@ int directory_findname(struct unixfilesystem *fs, const char *name,
 
     int num = block / sizeof(struct direntv6);
     for (int j = 0; j < num; j++) {
-      if (strncmp(dir[j].d_name, name) == 0) {
+      if (strcmp(buf[j].d_name, name) == 0) {
         *dirEnt = buf[j];
         return 0;
       }
