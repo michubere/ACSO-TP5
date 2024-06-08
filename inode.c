@@ -10,7 +10,7 @@
  * TODO
  */
 int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
-    if (inumber < 1 || inumber > fs->superblock.s_ninodes) {
+    if (inumber < 1 || inumber > fs->superblock.s_ninodes || inp == NULL || fs == NULL) {
         return -1;
     }
 
@@ -34,7 +34,7 @@ int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
  */
 int inode_indexlookup(struct unixfilesystem *fs, struct inode *inp,
     int blockNum) {  
-    if (blockNum < 0 || blockNum >= 8) {
+    if (blockNum < 0 || blockNum >= 8 || inp == NULL || fs == NULL) {
         return -1;
     }
 

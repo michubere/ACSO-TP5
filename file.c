@@ -10,6 +10,10 @@
  */
 int file_getblock(struct unixfilesystem *fs, int inumber, int blockNum, void *buf) {
     
+    if (blockNum < 0 || blockNum >= 8 || inumber < 1 || inumber > fs->superblock.s_ninodes || buf == NULL || fs == NULL) {
+        return -1;
+    }
+
     struct inode inp;
     int inode = inode_iget(fs, inumber, &inp);
     if (inode == -1) {
@@ -30,7 +34,7 @@ int file_getblock(struct unixfilesystem *fs, int inumber, int blockNum, void *bu
     if (bytes < 0) {
         return -1;
     }
-    
+
     int blocks = bytes / DISKIMG_SECTOR_SIZE;
     if (blockNum == blocks) {
         return bytes % DISKIMG_SECTOR_SIZE;
