@@ -5,6 +5,7 @@
 #include "diskimg.h"
 
 #define INDIR_ADDR 7
+#define INODE_START_SECTOR 2
 
 /**
  * TODO
@@ -15,7 +16,7 @@ int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
     }
 
     int inodes_per_block = DISKIMG_SECTOR_SIZE / sizeof(struct inode);
-    int block_num = (inumber - 1) / inodes_per_block; //ver si agregar +2 o no
+    int block_num = (inumber - 1) / inodes_per_block + INODE_START_SECTOR;
     int offset = (inumber - 1) % inodes_per_block;
 
     struct inode inodes[inodes_per_block];
