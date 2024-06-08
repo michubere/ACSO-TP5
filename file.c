@@ -10,7 +10,7 @@
  */
 int file_getblock(struct unixfilesystem *fs, int inumber, int blockNum, void *buf) {
     
-    if (blockNum < 0 || blockNum >= 8 || inumber < 1 || inumber > fs->superblock.s_ninodes || buf == NULL || fs == NULL) {
+    if (blockNum < 0 || blockNum >= 8 || inumber < 1 || inumber > fs->superblock.s_ninode || buf == NULL || fs == NULL) {
         return -1;
     }
 

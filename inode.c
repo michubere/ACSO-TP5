@@ -11,7 +11,7 @@
  * TODO
  */
 int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
-    if (inumber < 1 || inumber > fs->superblock.s_ninodes || inp == NULL || fs == NULL) {
+    if (inumber < 1 || inumber > fs->superblock.s_ninode || inp == NULL || fs == NULL) {
         return -1;
     }
 

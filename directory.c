@@ -13,7 +13,7 @@
 int directory_findname(struct unixfilesystem *fs, const char *name,
 		int dirinumber, struct direntv6 *dirEnt) {
   
-  if (fs == NULL || strlen(name) == 0 || strlen(name) > DIRENTV6_NAMELEN || dirinumber < 1 || dirinumber > fs->superblock.s_ninodes || dirEnt == NULL) {
+  if (fs == NULL || name == NULL || strlen(name) == 0 || strlen(name) > DIRENTV6_NAMELEN || dirinumber < 1 || dirinumber > fs->superblock.s_ninode || dirEnt == NULL) {
     return -1;
   }
 
