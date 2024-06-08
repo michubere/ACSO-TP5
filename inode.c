@@ -4,7 +4,7 @@
 #include "inode.h"
 #include "diskimg.h"
 
-#define INDIR_ADDR = 7
+#define INDIR_ADDR 7
 
 /**
  * TODO
