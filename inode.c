@@ -10,9 +10,9 @@
  * TODO
  */
 int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
-    if (inumber < 1 || inumber > fs->superblock.s_ninode || inp == NULL || fs == NULL) {
-        return -1;
-    }
+    // if (inumber < 1 || inumber > fs->superblock.s_ninode || inp == NULL || fs == NULL) {
+    //     return -1;
+    // }
 
     int inodes_per_block = DISKIMG_SECTOR_SIZE / sizeof(struct inode);
     int block_num = (inumber - 1) / inodes_per_block;
@@ -34,9 +34,9 @@ int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
  */
 int inode_indexlookup(struct unixfilesystem *fs, struct inode *inp,
     int blockNum) {  
-    if (blockNum < 0 || blockNum >= 8 || inp == NULL || fs == NULL) {
-        return -1;
-    }
+    // if (blockNum < 0 || blockNum >= 8 || inp == NULL || fs == NULL) {
+    //     return -1;
+    // }
 
     // small file
     if ((inp->i_mode & ILARG) == 0) {
