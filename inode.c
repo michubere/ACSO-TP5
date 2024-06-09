@@ -24,17 +24,17 @@ int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
     struct inode inodes[inodes_per_block];
     int read = diskimg_readsector(fs->dfd, INODE_START_SECTOR + block_num, inodes);
     if (read == -1) {
-        fprintf(stderr, "Error reading sector %d\n", block_num);
+        //fprintf(stderr, "Error reading sector %d\n", block_num);
         return -1;
     }
 
     *inp = inodes[offset];
-    fprintf(stderr, "Read inode %d from block %d, offset %d\n", inumber, block_num, offset);
-    fprintf(stderr, "Inode mode: 0x%x\n", inp->i_mode);
+    // fprintf(stderr, "Read inode %d from block %d, offset %d\n", inumber, block_num, offset);
+    // fprintf(stderr, "Inode mode: 0x%x\n", inp->i_mode);
 
     // Chequeo si el inodo está asignado
     if (!(inp->i_mode & IALLOC)) {
-        fprintf(stderr, "Inode %d is not allocated (IALLOC not set)\n", inumber);
+        // fprintf(stderr, "Inode %d is not allocated (IALLOC not set)\n", inumber);
         return -1;
     }
 
