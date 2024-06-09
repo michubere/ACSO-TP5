@@ -21,7 +21,7 @@ int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
 
     struct inode inodes[inodes_per_block];
     int read = diskimg_readsector(fs->dfd, INODE_START_SECTOR + offset, inodes);
-    if (read = -1) {
+    if (read == -1) {
         fprintf(stderr, "Error reading sector %d\n", block_num);
         return -1;
     }
