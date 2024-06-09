@@ -9,18 +9,19 @@
 /**
  * TODO
  */
+
 int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
-    // if (inumber < 1 || inumber > fs->superblock.s_ninode || inp == NULL || fs == NULL) {
-    //     return -1;
-    // }
-    // COMENTO TODOS LOS CHEQUEOS PORQUE ME ESTÁN GENERANDO ERRORES POR ALGUNA RAZÓN QUE NO ENTIENDO
+    // Chequeos básicos
+    if (inumber < 1 || inumber > fs->superblock.s_ninode || inp == NULL || fs == NULL) {
+        return -1;
+    }
 
     int inodes_per_block = DISKIMG_SECTOR_SIZE / sizeof(struct inode);
     int block_num = (inumber - 1) / inodes_per_block;
     int offset = (inumber - 1) % inodes_per_block;
 
     struct inode inodes[inodes_per_block];
-    int read = diskimg_readsector(fs->dfd, INODE_START_SECTOR + offset, inodes);
+    int read = diskimg_readsector(fs->dfd, INODE_START_SECTOR + block_num, inodes);
     if (read == -1) {
         fprintf(stderr, "Error reading sector %d\n", block_num);
         return -1;
@@ -29,6 +30,12 @@ int inode_iget(struct unixfilesystem *fs, int inumber, struct inode *inp) {
     *inp = inodes[offset];
     fprintf(stderr, "Read inode %d from block %d, offset %d\n", inumber, block_num, offset);
     fprintf(stderr, "Inode mode: 0x%x\n", inp->i_mode);
+
+    // Chequeo si el inodo está asignado
+    if (!(inp->i_mode & IALLOC)) {
+        fprintf(stderr, "Inode %d is not allocated (IALLOC not set)\n", inumber);
+        return -1;
+    }
 
     return 0; 
 }
